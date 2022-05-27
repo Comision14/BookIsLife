@@ -10,10 +10,17 @@ const toThousand = n => n.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g,
 
 module.exports={
     index: (req, res) =>{
-      return   res.render('index',{
-        products
+
+      let productsInSale = products.filter(product => product.category === "in-sale");
+      let productsRelevant = products.filter(product => product.category === "relevant");
+
+      return res.render('index',{
+        productsInSale,
+        productsRelevant,
+        toThousand
       })
     },
+    
     search: (req,res)=>{
 
       const {keywords} = req.query;
